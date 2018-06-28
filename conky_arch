@@ -1,0 +1,77 @@
+# Minimalist Arch
+# by YWFT
+#
+# used fonts
+#---------------------------------------------------------------------#
+# openlogos			=> http://gnome-look.org/content/show.php/OpenLogos?content=54390
+# Monospace	        => hhttp://fontforge.github.io/sfds/
+#---------------------------------------------------------------------#
+
+#avoid flicker
+double_buffer yes
+
+#own window to run simultanious 2 or more conkys
+own_window  yes
+own_window_transparent true
+own_window_type desktop
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_argb_visual yes
+own_window_argb_value 0
+
+# Borders
+draw_borders no
+border_outer_margin 2
+
+# Contour
+draw_outline no
+
+# Shades
+draw_shades no
+default_shade_color 000000
+
+# Position
+gap_y 20
+gap_x -300
+
+# Alignment
+#alignment bottom_middle
+alignment top_middle
+
+# Interval
+update_interval 2
+# Color
+default_color FFFFFF
+color1 f8f8f2
+color2 f8f8f2
+color3 ffc30f
+color4 4db6ac
+color5 ea1646
+color6 4db6ac
+
+# Font
+use_xft yes
+xftfont Monospace:pixelsize=10
+uppercase no
+
+# Text alpha when using Xft
+#xftalpha 0.10
+
+# to prevent window from moving
+use_spacer none
+minimum_size 2560 0
+
+
+TEXT
+
+${color4}${font openlogos:size=25}B ${font}${voffset -15}${font Monospace:normal:size=10}${color5}SYSTEM: ${color4}$nodename${offset 3}${color4}${offset 15}${font Monospace:normal:size=10}${color5}ARCHITECTURE: ${color4}$kernel${offset 8}${offset 10}${font Monospace:normal:size=10}${color5}TIME: ${color4}${time %H:%M:%S}${offset 9} ${color5}\# ${color2}BTC:${color4} ${texeci 1650 curl https://api.coinmarketcap.com/v1/ticker/bitcoin/ | grep "price_usd" | grep -oE "[0-9]*\....." | colrm 5} USD ${color5} \# \
+${color2}CPU:${color4} ${cpu}% ${color5}\# \
+${color2}TEMP:${color4} ${acpitemp}°C${color5} \# \
+${color2}RAM:${color4} ${memperc}% ${color5}\# \
+${color2}SWAP:${color4} ${swapperc}% ${color5}\# \
+${color2}HD:${color4} ${fs_bar 6,100 /} ${color4}${fs_used_perc}%${color5} \# \
+${color2}DL: ${color4}${totaldown wlp58s0}${color2} UL: ${color4}${totalup wlp58s0}${color5} \# \
+${color2}SSID: ${color4}${wireless_essid wlp58s0}${color2} WIFI: ${color4}${wireless_link_qual_perc wlp58s0}%${color5} \# \
+${color2}UPDATES ${color4}${execi 3600 pacman -Qu | wc -l}${color5} \# \
+${color2}BAT:${color4} $battery_percent% ${if_match "$acpiacadapter" != "off-line" }${voffset -12}${color3}${font Veneer Clean Extras:lowercase:size=25}:f${else}${voffset -18}${color3}${font Veneer Clean Extras:size=25}${endif}${font}
+
+
